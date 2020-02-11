@@ -3,8 +3,6 @@ import { LabelingService } from './labeling.service';
 import BaseController from 'src/BaseController';
 import { Sentence } from './sentence.entity';
 
-
-// labeling->(getOneUnlabeledSentence(),updateOneSentence(id),getSentenceById(id),)
 @Controller('labeling')
 export class LabelingController extends BaseController{
     constructor(private readonly labelingService:LabelingService){
@@ -34,7 +32,7 @@ export class LabelingController extends BaseController{
     async updateOneSentence(@Body() sentence:Sentence){
         if(!sentence)return await this.error(2,"Wrong Param",[]);
         const res = await this.labelingService.updateOneSentence(sentence);
-        if(res)return this.send("success update",res)
+        if(res)return this.send("success update",[])
         else return this.error(3,"failed to update,try other time",[])
     }
 }
