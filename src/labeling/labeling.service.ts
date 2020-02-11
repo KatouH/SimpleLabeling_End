@@ -43,7 +43,8 @@ export class LabelingService{
     }
 
     async updateOneSentence(newS:Sentence){
-        let s = await await this.SentenceRepository.createQueryBuilder("data_list").where(`data_list.id = ${newS.id}`).getOne()
+        let s = await this.SentenceRepository.createQueryBuilder("data_list").where(`data_list.id = ${newS.id}`).getOne()
+        if(!s)return undefined;
         newS.id  = s.id //newS.id string || s.id number 
         Object.assign(s,newS)
         s = await this.SentenceRepository.save(s);

@@ -32,7 +32,10 @@ export class LabelingController extends BaseController{
 
     @Post('updateone')
     async updateOneSentence(@Body() sentence:Sentence){
-        return this.labelingService.updateOneSentence(sentence);
+        if(!sentence)return await this.error(2,"Wrong Param",[]);
+        const res = await this.labelingService.updateOneSentence(sentence);
+        if(res)return this.send("success update",res)
+        else return this.error(3,"failed to update,try other time",[])
     }
 }
 
